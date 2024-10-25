@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yixboost Games Repositories</title>
+    <script src="https://cdn.skypack.dev/@octokit/rest"></script>
+</head>
+<body>
+    <h1>Repositories of Yixboost Games</h1>
+    <ul id="repo-list"></ul>
+
+    <script>
+        async function fetchRepositories() {
+            // Create a new Octokit instance
+            const octokit = new Octokit.Octokit();
+            
+            try {
+                // Fetch repositories for the 'yixboost-games' organization
+                const response = await octokit.rest.repos.listForOrg({
+                    org: 'yixboost-games',
+                    type: 'public'
+                });
+
+                // Get the repository list element
+                const repoList = document.getElementById('repo-list');
+
+                // Loop through each repository and add it to the list
+                response.data.forEach(repo => {
+                    const listItem = document.createElement('li');
+                    listItem.innerHTML = `<a href="${repo.html_url}" target="_blank">${repo.name}</a> - ${repo.description || 'No description'}`;
+                    repoList.appendChild(listItem);
+                });
+            } catch (error) {
+                console.error("Error fetching repositories:", error);
+            }
+        }
+
+        // Call the function on page load
+        fetchRepositories();
+    </script>
+</body>
+</html>
