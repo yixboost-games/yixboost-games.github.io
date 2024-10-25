@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yixboost Games Repositories</title>
-    <script src="https://cdn.skypack.dev/@octokit/rest"></script>
+    <!-- Gebruik de jsDelivr CDN voor de UMD-build van Octokit -->
+    <script src="https://cdn.jsdelivr.net/npm/@octokit/rest@18/dist/octokit.min.js"></script>
 </head>
 <body>
     <h1>Repositories of Yixboost Games</h1>
@@ -12,20 +13,20 @@
 
     <script>
         async function fetchRepositories() {
-            // Create a new Octokit instance
-            const octokit = new Octokit.Octokit();
-            
+            // Maak een nieuwe Octokit instance aan
+            const octokit = new Octokit();
+
             try {
-                // Fetch repositories for the 'yixboost-games' organization
-                const response = await octokit.rest.repos.listForOrg({
+                // Haal de repositories op voor de 'yixboost-games' organisatie
+                const response = await octokit.repos.listForOrg({
                     org: 'yixboost-games',
                     type: 'public'
                 });
 
-                // Get the repository list element
+                // Krijg het repo-lijst element
                 const repoList = document.getElementById('repo-list');
 
-                // Loop through each repository and add it to the list
+                // Loop door elke repository en voeg deze toe aan de lijst
                 response.data.forEach(repo => {
                     const listItem = document.createElement('li');
                     listItem.innerHTML = `<a href="${repo.html_url}" target="_blank">${repo.name}</a> - ${repo.description || 'No description'}`;
@@ -36,7 +37,7 @@
             }
         }
 
-        // Call the function on page load
+        // Roep de functie aan bij het laden van de pagina
         fetchRepositories();
     </script>
 </body>
