@@ -4,21 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yixboost Games Repositories</title>
-    <!-- Gebruik de jsDelivr CDN voor de UMD-build van Octokit -->
-    <script src="https://cdn.jsdelivr.net/npm/@octokit/rest@18/dist/octokit.min.js"></script>
 </head>
 <body>
     <h1>Repositories of Yixboost Games</h1>
     <ul id="repo-list"></ul>
 
-    <script>
+    <script type="module">
+        import { Octokit } from "https://esm.sh/octokit";
+
         async function fetchRepositories() {
             // Maak een nieuwe Octokit instance aan
             const octokit = new Octokit();
 
             try {
                 // Haal de repositories op voor de 'yixboost-games' organisatie
-                const response = await octokit.repos.listForOrg({
+                const response = await octokit.request('GET /orgs/{org}/repos', {
                     org: 'yixboost-games',
                     type: 'public'
                 });
