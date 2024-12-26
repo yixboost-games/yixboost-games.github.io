@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maintenance - We'll be back soon</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body {
             margin: 0;
@@ -65,7 +66,51 @@
             justify-content: center;
             color: #94a3b8;
             font-size: 0.875rem;
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .social-button {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            background: #2d3748;
+            color: #e2e8f0;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid #4a5568;
+        }
+
+        .social-button:hover {
+            background: #374151;
+            transform: translateY(-2px);
+        }
+
+        .social-button i {
+            margin-right: 8px;
+        }
+
+        .status-button {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            background: #3b82f6;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin: 1rem 0;
+        }
+
+        .status-button:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
         }
 
         .donate-section {
@@ -78,6 +123,12 @@
             color: #94a3b8;
             font-size: 0.875rem;
             margin-bottom: 1rem;
+        }
+
+        .sections-divider {
+            height: 1px;
+            background: #334155;
+            margin: 1.5rem 0;
         }
 
         @keyframes float {
@@ -101,10 +152,30 @@
         </svg>
         <h1>System Maintenance</h1>
         <p>Our development team is currently working hard to resolve server issues. We appreciate your patience and understanding during this time.</p>
+        
         <div class="status-text">
             <span class="status-indicator"></span>
             System currently offline
         </div>
+
+        <a href="https://yixboostnl.statuspage.io/" target="_blank" class="status-button">
+            <i class="fas fa-chart-bar"></i> Check System Status
+        </a>
+
+        <div class="sections-divider"></div>
+
+        <div class="social-links">
+            <a href="https://github.com/Yixboost" target="_blank" class="social-button">
+                <i class="fab fa-github"></i> GitHub
+            </a>
+            <a href="https://youtube.com/@Yixboost" target="_blank" class="social-button">
+                <i class="fab fa-youtube"></i> YouTube
+            </a>
+            <a href="https://discord.gg/KedhHcekjE" target="_blank" class="social-button">
+                <i class="fab fa-discord"></i> Discord
+            </a>
+        </div>
+
         <div class="donate-section">
             <p class="donate-text">Support our server maintenance efforts</p>
             <form action="https://www.paypal.com/donate" method="post" target="_top">
