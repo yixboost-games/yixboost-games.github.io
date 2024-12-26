@@ -65,6 +65,19 @@
             justify-content: center;
             color: #94a3b8;
             font-size: 0.875rem;
+            margin-bottom: 2rem;
+        }
+
+        .donate-section {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #334155;
+        }
+
+        .donate-text {
+            color: #94a3b8;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
         }
 
         @keyframes float {
@@ -91,6 +104,14 @@
         <div class="status-text">
             <span class="status-indicator"></span>
             System currently offline
+        </div>
+        <div class="donate-section">
+            <p class="donate-text">Support our server maintenance efforts</p>
+            <form action="https://www.paypal.com/donate" method="post" target="_top">
+                <input type="hidden" name="business" value="YIXBOOST@MAIL.COM" />
+                <input type="hidden" name="currency_code" value="EUR" />
+                <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+            </form>
         </div>
     </div>
 
