@@ -3,132 +3,339 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Server Offline</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Yixboost Games - Farewell</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
     <style>
+        :root {
+            --purple-accent: #8a2be2;
+            --blue-accent: #4169e1;
+        }
+        
         body {
-            margin: 0;
-            padding: 0;
+            background-color: #000000;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+        }
+
+        .particle {
+            position: fixed;
+            width: 3px;
+            height: 3px;
+            background: var(--purple-accent);
+            pointer-events: none;
+            border-radius: 50%;
+        }
+        
+        .hero-section {
             min-height: 100vh;
-            font-family: system-ui, -apple-system, sans-serif;
-            background: #0f172a;
+            background: linear-gradient(45deg, rgba(138, 43, 226, 0.2), rgba(65, 105, 225, 0.2));
+            position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #e2e8f0;
+            overflow: hidden;
         }
 
-        .container {
-            max-width: 600px;
-            padding: 2rem;
-            margin: 1rem;
-            background: #1e293b;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        .hero-content {
             text-align: center;
-            opacity: 0;
-            transform: translateY(20px);
+            z-index: 2;
         }
 
-        .icon {
-            width: 80px;
-            height: 80px;
-            margin-bottom: 1.5rem;
-            animation: float 3s ease-in-out infinite;
+        .hero-title {
+            font-size: 5rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, var(--purple-accent), var(--blue-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glow 2s ease-in-out infinite alternate;
         }
 
-        h1 {
-            color: #f8fafc;
-            margin-bottom: 1rem;
-            font-size: 2rem;
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px var(--purple-accent), 0 0 20px var(--purple-accent);
+            }
+            to {
+                text-shadow: 0 0 20px var(--blue-accent), 0 0 30px var(--blue-accent);
+            }
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px 0;
+            border: 1px solid rgba(138, 43, 226, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(138, 43, 226, 0.1), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
         }
 
-        p {
-            color: #cbd5e1;
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
         }
-
-        .status-indicator {
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            background-color: #ef4444;
-            border-radius: 50%;
-            margin-right: 8px;
+        
+        .stat-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 10px 30px rgba(138, 43, 226, 0.3);
+        }
+        
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, var(--purple-accent), var(--blue-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             animation: pulse 2s infinite;
         }
 
-        .status-text {
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .farewell-message {
+            border-left: 4px solid var(--purple-accent);
+            padding: 30px;
+            margin: 30px 0;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 0 15px 15px 0;
+            position: relative;
+        }
+
+        .country-stat {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .country-stat:hover {
+            background: rgba(138, 43, 226, 0.1);
+            transform: translateX(10px);
+        }
+
+        .progress-bar {
+            height: 5px;
+            background: linear-gradient(90deg, var(--purple-accent), var(--blue-accent));
+            width: 0;
+            transition: width 1s ease;
+            margin-top: 5px;
+        }
+
+        .section {
+            min-height: 100vh;
             display: flex;
             align-items: center;
-            justify-content: center;
-            color: #94a3b8;
-            font-size: 0.875rem;
-            margin-bottom: 1rem;
+            padding: 100px 0;
+            position: relative;
         }
 
-        .status-button {
-            display: inline-block;
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
-            background: #3b82f6;
-            color: white;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            margin: 1rem 0;
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(138, 43, 226, 0.3);
         }
 
-        .status-button:hover {
-            background: #2563eb;
-            transform: translateY(-2px);
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+        .floating {
+            animation: floating 3s ease-in-out infinite;
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.2); opacity: 0.8; }
-            100% { transform: scale(1); opacity: 1; }
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-30px); }
+            60% { transform: translateY(-15px); }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M10.5 1.5H8.25C7.00736 1.5 6 2.50736 6 3.75V20.25C6 21.4926 7.00736 22.5 8.25 22.5H15.75C16.9926 22.5 18 21.4926 18 20.25V3.75C18 2.50736 16.9926 1.5 15.75 1.5H13.5M10.5 1.5V3H13.5V1.5M10.5 1.5H13.5" stroke="#818cf8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M12 18.5V18.51" stroke="#818cf8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M9 12C9 10.3431 10.3431 9 12 9C13.6569 9 15 10.3431 15 12C15 13.6569 13.6569 15 12 15" stroke="#818cf8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <h1>Server Offline</h1>
-        <p>Due to security issues and other circumstances we are setting up a new server. During this time our current server unfortunately cannot go online and Yixboost is OFFLINE for a while, until the new server is up and running, our apologies for the inconvenience.</p>
-
-        <div class="status-text">
-            <span class="status-indicator"></span>
-            System currently offline
+    <div class="hero-section">
+        <div class="hero-content animate__animated animate__fadeIn">
+            <h1 class="hero-title mb-4">Farewell Yixboost Games</h1>
+            <p class="lead animate__animated animate__fadeIn animate__delay-1s">Thank you for 2 incredible years of gaming memories</p>
         </div>
-
-        <a href="https://yixboost.statuspage.io/" target="_blank" class="status-button">
-            <i class="fas fa-chart-bar"></i> Check System Status
-        </a>
-
-        <a href="https://yixboost-site.onrender.com/" target="_blank" class="status-button">
-            <i class="fa-solid fa-gamepad"></i> Play on extremely slow server
-        </a>
+        <div class="scroll-indicator">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                <path d="M7 13l5 5 5-5M7 6l5 5 5-5"/>
+            </svg>
+        </div>
     </div>
 
+    <div class="section" data-aos="fade-up">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 offset-md-2 mb-5">
+                    <div class="video-container" data-aos="zoom-in">
+                        <iframe src="https://www.youtube.com/embed/ugYHSjni6zg?si=iFld9yl_RXT527ba" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3" data-aos="fade-right" data-aos-delay="100">
+                    <div class="stat-card floating">
+                        <div class="stat-number" data-value="1017">0</div>
+                        <div>Days Online</div>
+                        <small class="text-muted">2 years, 41 weeks</small>
+                    </div>
+                </div>
+                <div class="col-md-3" data-aos="fade-right" data-aos-delay="200">
+                    <div class="stat-card floating">
+                        <div class="stat-number" data-value="3165205">0</div>
+                        <div>Games Played</div>
+                        <small class="text-muted">Across all titles</small>
+                    </div>
+                </div>
+                <div class="col-md-3" data-aos="fade-right" data-aos-delay="300">
+                    <div class="stat-card floating">
+                        <div class="stat-number" data-value="152000">0</div>
+                        <div>Unique Players</div>
+                        <small class="text-muted">From around the world</small>
+                    </div>
+                </div>
+                <div class="col-md-3" data-aos="fade-right" data-aos-delay="400">
+                    <div class="stat-card floating">
+                        <div class="stat-number" data-value="56">0</div>
+                        <div>Countries</div>
+                        <small class="text-muted">Global community</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="container">
+            <div class="row">
+<div class="col-md-6" data-aos="fade-right">
+    <h3 class="mb-4">Most Played Game:</h3>
+    <img src="retrobowl.png" style="max-width: 100%; height: auto;">
+</div>
+
+                
+                <div class="col-md-6" data-aos="fade-left">
+                    <h3 class="mb-4">Farewell Message</h3>
+                    <div class="farewell-message">
+                        <p>Dear Yixboost Games Community,</p>
+                        <p>After an incredible journey of 2 years, we must announce that Yixboost Games will be closing its virtual doors. We are immensely grateful for the amazing community that has grown around our platform.</p>
+                        <p>The memories, friendships, and achievements you've all created here will forever remain in our hearts.</p>
+                        <p>Thank you for being part of this incredible journey.</p>
+                        <p class="mb-0">- The Yixboost Team</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script>
-        // GSAP animation for container
-        gsap.to('.container', {
-            duration: 1,
-            opacity: 1,
-            y: 0,
-            ease: 'power3.out'
+        AOS.init({
+            duration: 1000,
+            once: true
         });
+
+        // Animated number counting
+        const animateValue = (obj, start, end, duration) => {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                obj.innerHTML = Math.floor(progress * (end - start) + start).toLocaleString();
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        };
+
+        // Animate numbers when they come into view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const value = parseInt(entry.target.dataset.value);
+                    animateValue(entry.target, 0, value, 2000);
+                    observer.unobserve(entry.target);
+                }
+            });
+        });
+
+        document.querySelectorAll('.stat-number').forEach(number => {
+            observer.observe(number);
+        });
+
+        // Create floating particles
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * window.innerWidth + 'px';
+            particle.style.top = Math.random() * window.innerHeight + 'px';
+            document.body.appendChild(particle);
+
+            const animation = particle.animate([
+                { transform: 'translate(0, 0)', opacity: 1 },
+                { transform: `translate(${Math.random() * 200 - 100}px, ${Math.random() * 200 - 100}px)`, opacity: 0 }
+            ], {
+                duration: 3000,
+                easing: 'ease-out'
+            });
+
+            animation.onfinish = () => {
+                particle.remove();
+                createParticle();
+            };
+        }
+
+        // Create initial particles
+        for (let i = 0; i < 50; i++) {
+            setTimeout(createParticle, Math.random() * 3000);
+        }
     </script>
 </body>
 </html>
